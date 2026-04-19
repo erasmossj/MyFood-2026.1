@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="25.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Pedido">
+    <void property="cliente">
+     <int>38</int>
+    </void>
+    <void property="empresa">
+     <int>32</int>
+    </void>
+    <void property="estado">
+     <string>preparando</string>
+    </void>
+    <void property="numero">
+     <int>8</int>
+    </void>
+    <void property="produtos">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <int>24</int>
+      </void>
+      <void method="add">
+       <int>25</int>
+      </void>
+      <void method="add">
+       <int>26</int>
+      </void>
+     </object>
+    </void>
+    <void property="valor">
+     <float>6.2</float>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Pedido">
+    <void property="cliente">
+     <int>38</int>
+    </void>
+    <void property="empresa">
+     <int>33</int>
+    </void>
+    <void property="estado">
+     <string>aberto</string>
+    </void>
+    <void property="numero">
+     <int>9</int>
+    </void>
+    <void property="produtos">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <int>27</int>
+      </void>
+      <void method="add">
+       <int>27</int>
+      </void>
+     </object>
+    </void>
+    <void property="valor">
+     <float>10.0</float>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Pedido">
+    <void property="cliente">
+     <int>38</int>
+    </void>
+    <void property="empresa">
+     <int>32</int>
+    </void>
+    <void property="estado">
+     <string>aberto</string>
+    </void>
+    <void property="numero">
+     <int>10</int>
+    </void>
+    <void property="produtos">
+     <object class="java.util.ArrayList"/>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
