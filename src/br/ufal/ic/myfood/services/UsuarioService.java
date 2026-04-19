@@ -9,7 +9,6 @@ import br.ufal.ic.myfood.utils.Validador;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UsuarioService {
     private List<Usuario> usuariosList;
@@ -71,12 +70,12 @@ public class UsuarioService {
         addUsuario(dono);
     }
 
-    public int login(String email, String senha) throws InvalidLoginOuSenha {
-        if (!Validador.emailValido(email)) throw new InvalidLoginOuSenha();
-        if (!Validador.senhaValida(senha)) throw new InvalidLoginOuSenha();
+    public int login(String email, String senha) throws LoginOuSenhaInvalidoException {
+        if (!Validador.emailValido(email)) throw new LoginOuSenhaInvalidoException();
+        if (!Validador.senhaValida(senha)) throw new LoginOuSenhaInvalidoException();
         Usuario usuario = usuariosList.stream().filter(u -> u.getEmail().equals(email)).findFirst().orElse(null);
         if (usuario == null || !senha.equals(usuario.getSenha())) {
-            throw new InvalidLoginOuSenha();
+            throw new LoginOuSenhaInvalidoException();
         }
         return usuario.getId();
     }

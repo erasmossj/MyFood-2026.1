@@ -1,7 +1,7 @@
 package br.ufal.ic.myfood.repository;
 
 import br.ufal.ic.myfood.exceptions.UsuarioNaoExisteException;
-import br.ufal.ic.myfood.exceptions.FalhaAoSalvar;
+import br.ufal.ic.myfood.exceptions.FalhaAoSalvarException;
 import br.ufal.ic.myfood.models.Usuario;
 
 import java.beans.XMLDecoder;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioRepository {
-    public static void save(List<Usuario> usuariosList) throws FalhaAoSalvar{
+    public static void save(List<Usuario> usuariosList) throws FalhaAoSalvarException {
         try {
             String path = "data/usuario_data.xml";
             XMLEncoder encoder = new XMLEncoder(
@@ -20,7 +20,7 @@ public class UsuarioRepository {
             encoder.writeObject(usuariosList);
             encoder.close();
         } catch (Exception e) {
-            throw new FalhaAoSalvar("Falha ao salvar os usuários");
+            throw new FalhaAoSalvarException("Falha ao salvar os usuários");
         }
     }
 

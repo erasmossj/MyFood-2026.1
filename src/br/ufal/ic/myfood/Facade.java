@@ -46,7 +46,7 @@ public class Facade {
         this.usuarioService.criarUsuario(nome, email, senha, endereco, cpf);
     }
 
-    public int login(String email, String senha) throws InvalidLoginOuSenha {
+    public int login(String email, String senha) throws LoginOuSenhaInvalidoException {
         return this.usuarioService.login(email, senha);
     }
 
