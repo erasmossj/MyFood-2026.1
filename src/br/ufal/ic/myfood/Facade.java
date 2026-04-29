@@ -50,8 +50,12 @@ public class Facade {
         return this.usuarioService.login(email, senha);
     }
 
-    public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String tipoCozinha) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException {
+    public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String tipoCozinha) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoInvalidoException, TipoEmpresaInvalidoException {
         return this.empresaService.criarEmpresa(tipoEmpresa, dono, nome, endereco, tipoCozinha);
+    }
+
+    public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String abre, String fecha, String tipoMercado) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoInvalidoException, TipoEmpresaInvalidoException, FormatoHoraInvalidoException, HorarioInvalidoException, TipoMercadoInvalidoException {
+        return this.empresaService.criarEmpresa(tipoEmpresa, dono, nome, endereco, abre, fecha, tipoMercado);
     }
 
     public String getEmpresasDoUsuario(int idDono) throws UsuarioNaoPodeCriarException {
@@ -104,6 +108,10 @@ public class Facade {
 
     public int getNumeroPedido(int cliente, int empresa, int indice) throws IndiceInvalidoException, EmpresaNaoExisteException {
         return this.pedidoService.getNumeroPedido(cliente, empresa, indice);
+    }
+
+    public void alterarFuncionamento(int mercado, String abre, String fecha) throws EmpresaNaoCadastradaException, FormatoHoraInvalidoException, HorarioInvalidoException {
+        this.empresaService.alterarFuncionamento(mercado, abre, fecha);
     }
 
     public void encerrarSistema() {

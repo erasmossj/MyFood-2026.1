@@ -7,10 +7,10 @@
      <string>alimento</string>
     </void>
     <void property="empresa">
-     <int>32</int>
+     <int>8</int>
     </void>
     <void property="id">
-     <int>24</int>
+     <int>59</int>
     </void>
     <void property="nome">
      <string>Sorvete morango</string>
@@ -26,10 +26,10 @@
      <string>alimento</string>
     </void>
     <void property="empresa">
-     <int>32</int>
+     <int>8</int>
     </void>
     <void property="id">
-     <int>25</int>
+     <int>60</int>
     </void>
     <void property="nome">
      <string>Sorvete chocolate</string>
@@ -45,10 +45,10 @@
      <string>bebida</string>
     </void>
     <void property="empresa">
-     <int>32</int>
+     <int>8</int>
     </void>
     <void property="id">
-     <int>26</int>
+     <int>61</int>
     </void>
     <void property="nome">
      <string>Refrigerante</string>
@@ -64,10 +64,10 @@
      <string>alimento</string>
     </void>
     <void property="empresa">
-     <int>33</int>
+     <int>9</int>
     </void>
     <void property="id">
-     <int>27</int>
+     <int>62</int>
     </void>
     <void property="nome">
      <string>Pastel de queijo</string>

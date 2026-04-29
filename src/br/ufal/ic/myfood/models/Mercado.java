@@ -1,0 +1,46 @@
+package br.ufal.ic.myfood.models;
+
+public final class Mercado extends Empresa {
+    private String abre;
+    private String fecha;
+    private String tipoMercado;
+
+    public Mercado(String nome, String endereco, int dono, String abre, String fecha, String tipoMercado) {
+        super(nome, endereco, dono, "mercado");
+        setAbre(abre);
+        setFecha(fecha);
+        setTipoMercado(tipoMercado);
+    }
+
+    public Mercado() {
+    }
+
+    public String getAbre() {
+        return abre;
+    }
+
+    public void setAbre(String abre) {
+        this.abre = abre;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getTipoMercado() {
+        return tipoMercado;
+    }
+
+    public void setTipoMercado(String tipoMercado) {
+        this.tipoMercado = tipoMercado;
+    }
+
+    @Override
+    public String getTipo() {
+        return tipoMercado;
+    }
+}

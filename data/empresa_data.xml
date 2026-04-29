@@ -2,15 +2,15 @@
 <java version="25.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Empresa">
+   <object class="br.ufal.ic.myfood.models.Restaurante">
     <void property="dono">
-     <int>37</int>
+     <int>77</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 987</string>
     </void>
     <void property="id">
-     <int>32</int>
+     <int>8</int>
     </void>
     <void property="nome">
      <string>Sorveteria do Roberto</string>
@@ -18,24 +18,30 @@
     <void property="tipoCozinha">
      <string>brasileira</string>
     </void>
+    <void property="tipoEmpresa">
+     <string>restaurante</string>
+    </void>
    </object>
   </void>
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Empresa">
+   <object class="br.ufal.ic.myfood.models.Restaurante">
     <void property="dono">
-     <int>37</int>
+     <int>77</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 987</string>
     </void>
     <void property="id">
-     <int>33</int>
+     <int>9</int>
     </void>
     <void property="nome">
      <string>Pastelaria do Roberto</string>
     </void>
     <void property="tipoCozinha">
      <string>brasileira</string>
+    </void>
+    <void property="tipoEmpresa">
+     <string>restaurante</string>
     </void>
    </object>
   </void>

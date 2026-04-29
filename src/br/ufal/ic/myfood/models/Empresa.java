@@ -2,20 +2,20 @@ package br.ufal.ic.myfood.models;
 
 import java.io.Serializable;
 
-public class Empresa implements Serializable {
+public abstract class Empresa implements Serializable {
     static int nextId = 1;
     private int id;
     private String nome;
     private String endereco;
-    private String tipoCozinha;
     private int dono;
+    private String tipoEmpresa;
 
-    public Empresa(String nome, String endereco, String tipoCozinha, int dono) {
+    public Empresa(String nome, String endereco, int dono, String tipoEmpresa) {
         setId(Empresa.nextId++);
         setNome(nome);
         setEndereco(endereco);
-        setTipoCozinha(tipoCozinha);
         setDono(dono);
+        setTipoEmpresa(tipoEmpresa);
     }
 
     public Empresa() {
@@ -45,14 +45,6 @@ public class Empresa implements Serializable {
         this.endereco = endereco;
     }
 
-    public String getTipoCozinha() {
-        return tipoCozinha;
-    }
-
-    public void setTipoCozinha(String tipoCozinha) {
-        this.tipoCozinha = tipoCozinha;
-    }
-
     public int getDono() {
         return dono;
     }
@@ -60,6 +52,16 @@ public class Empresa implements Serializable {
     public void setDono(int dono) {
         this.dono = dono;
     }
+
+    public String getTipoEmpresa() {
+        return tipoEmpresa;
+    }
+
+    public void setTipoEmpresa(String tipoEmpresa) {
+        this.tipoEmpresa = tipoEmpresa;
+    }
+
+    public abstract String getTipo();
 
     public static void updateNextId(int maxId) {
         nextId = maxId + 1;
