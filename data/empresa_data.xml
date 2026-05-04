@@ -2,40 +2,130 @@
 <java version="25.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Restaurante">
+   <object class="br.ufal.ic.myfood.models.Mercado">
+    <void property="abre">
+     <string>07:30</string>
+    </void>
     <void property="dono">
-     <int>77</int>
+     <int>250</int>
     </void>
     <void property="endereco">
-     <string>Rua Segura N 987</string>
+     <string>Rua Segura N 123</string>
+    </void>
+    <void property="fecha">
+     <string>21:00</string>
     </void>
     <void property="id">
-     <int>8</int>
+     <int>224</int>
     </void>
     <void property="nome">
-     <string>Sorveteria do Roberto</string>
-    </void>
-    <void property="tipoCozinha">
-     <string>brasileira</string>
+     <string>Mercado do Carlos</string>
     </void>
     <void property="tipoEmpresa">
-     <string>restaurante</string>
+     <string>mercado</string>
+    </void>
+    <void property="tipoMercado">
+     <string>supermercado</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Mercado">
+    <void property="abre">
+     <string>06:30</string>
+    </void>
+    <void property="dono">
+     <int>250</int>
+    </void>
+    <void property="endereco">
+     <string>Rua Segura N 123</string>
+    </void>
+    <void property="fecha">
+     <string>23:59</string>
+    </void>
+    <void property="id">
+     <int>225</int>
+    </void>
+    <void property="nome">
+     <string>Conveniencias do Carlos</string>
+    </void>
+    <void property="tipoEmpresa">
+     <string>mercado</string>
+    </void>
+    <void property="tipoMercado">
+     <string>minimercado</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Mercado">
+    <void property="abre">
+     <string>07:30</string>
+    </void>
+    <void property="dono">
+     <int>250</int>
+    </void>
+    <void property="endereco">
+     <string>Rua Otima N 852</string>
+    </void>
+    <void property="fecha">
+     <string>21:00</string>
+    </void>
+    <void property="id">
+     <int>226</int>
+    </void>
+    <void property="nome">
+     <string>Mercado do Carlos</string>
+    </void>
+    <void property="tipoEmpresa">
+     <string>mercado</string>
+    </void>
+    <void property="tipoMercado">
+     <string>atacadista</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Mercado">
+    <void property="abre">
+     <string>05:25</string>
+    </void>
+    <void property="dono">
+     <int>251</int>
+    </void>
+    <void property="endereco">
+     <string>Rua Segura N 123</string>
+    </void>
+    <void property="fecha">
+     <string>22:00</string>
+    </void>
+    <void property="id">
+     <int>227</int>
+    </void>
+    <void property="nome">
+     <string>Mercado do Roberto</string>
+    </void>
+    <void property="tipoEmpresa">
+     <string>mercado</string>
+    </void>
+    <void property="tipoMercado">
+     <string>supermercado</string>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Restaurante">
     <void property="dono">
-     <int>77</int>
+     <int>250</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 987</string>
     </void>
     <void property="id">
-     <int>9</int>
+     <int>228</int>
     </void>
     <void property="nome">
-     <string>Pastelaria do Roberto</string>
+     <string>Pastelaria do Carlos</string>
     </void>
     <void property="tipoCozinha">
      <string>brasileira</string>

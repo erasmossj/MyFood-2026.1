@@ -1,5 +1,8 @@
 package br.ufal.ic.myfood.utils;
 
+import br.ufal.ic.myfood.exceptions.FormatoHoraInvalidoException;
+import br.ufal.ic.myfood.exceptions.HorarioInvalidoException;
+
 public class Validador {
     public static boolean senhaValida(String senha){
         if (senha == null || senha.isEmpty()) return false;
@@ -44,27 +47,25 @@ public class Validador {
         return true;
     }
 
-    public static boolean horaValida(String hora) {
-        if (hora == null || hora.isEmpty()) return false;
-        if (!hora.matches("\\d{1,2}:\\d{2}")) return false;
+    public static void validarHora(String hora) throws FormatoHoraInvalidoException, HorarioInvalidoException {
+        if (hora == null) throw new HorarioInvalidoException();
+        if (hora.isEmpty()) throw new FormatoHoraInvalidoException();
+        if (!hora.matches("\\d{2}:\\d{2}")) throw new FormatoHoraInvalidoException();
         String[] partes = hora.split(":");
         int h = Integer.parseInt(partes[0]);
         int m = Integer.parseInt(partes[1]);
-        if (h < 0 || h > 23 || m < 0 || m > 59) return false;
-        return true;
+        if (h < 0 || h > 23 || m < 0 || m > 59) throw new HorarioInvalidoException();
     }
 
-    public static boolean horarioValido(String abre, String fecha) {
-        if (abre == null || fecha == null) return false;
-        if (!horaValida(abre) || !horaValida(fecha)) return false;
+    public static void validarHorario(String abre, String fecha) throws HorarioInvalidoException {
+        if (abre == null || fecha == null) throw new HorarioInvalidoException();
         String[] abrePartes = abre.split(":");
         String[] fechaPartes = fecha.split(":");
         int abreH = Integer.parseInt(abrePartes[0]);
         int abreM = Integer.parseInt(abrePartes[1]);
         int fechaH = Integer.parseInt(fechaPartes[0]);
         int fechaM = Integer.parseInt(fechaPartes[1]);
-        if (fechaH < abreH || (fechaH == abreH && fechaM <= abreM)) return false;
-        return true;
+        if (fechaH < abreH || (fechaH == abreH && fechaM <= abreM)) throw new HorarioInvalidoException();
     }
 
     public static boolean tipoMercadoValido(String tipoMercado) {

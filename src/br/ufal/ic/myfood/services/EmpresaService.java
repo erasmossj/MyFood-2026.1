@@ -27,11 +27,11 @@ public class EmpresaService {
         return empresasList;
     }
 
-    public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String tipoCozinha) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoInvalidoException, TipoEmpresaInvalidoException {
+    public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String tipoCozinha) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoEmpresaInvalidoException, TipoEmpresaInvalidoException {
         if (tipoEmpresa == null || tipoEmpresa.isEmpty()) throw new TipoEmpresaInvalidoException();
         if (!tipoEmpresa.equals("restaurante")) throw new TipoEmpresaInvalidoException();
         if (!Validador.nomeValido(nome)) throw new NomeInvalidoException();
-        if (!Validador.enderecoValido(endereco)) throw new EnderecoInvalidoException();
+        if (!Validador.enderecoValido(endereco)) throw new EnderecoEmpresaInvalidoException();
         Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == dono).findFirst().orElse(null);
         if (usuario == null || !(usuario instanceof DonoEmpresa)) {
             throw new UsuarioNaoPodeCriarException();
@@ -48,14 +48,14 @@ public class EmpresaService {
         return empresa.getId();
     }
 
-    public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String abre, String fecha, String tipoMercado) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoInvalidoException, TipoEmpresaInvalidoException, FormatoHoraInvalidoException, HorarioInvalidoException, TipoMercadoInvalidoException {
+    public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String abre, String fecha, String tipoMercado) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoEmpresaInvalidoException, TipoEmpresaInvalidoException, FormatoHoraInvalidoException, HorarioInvalidoException, TipoMercadoInvalidoException {
         if (tipoEmpresa == null || tipoEmpresa.isEmpty()) throw new TipoEmpresaInvalidoException();
         if (!tipoEmpresa.equals("mercado")) throw new TipoEmpresaInvalidoException();
         if (!Validador.nomeValido(nome)) throw new NomeInvalidoException();
-        if (!Validador.enderecoValido(endereco)) throw new EnderecoInvalidoException();
-        if (!Validador.horaValida(abre)) throw new FormatoHoraInvalidoException();
-        if (!Validador.horaValida(fecha)) throw new FormatoHoraInvalidoException();
-        if (!Validador.horarioValido(abre, fecha)) throw new HorarioInvalidoException();
+        if (!Validador.enderecoValido(endereco)) throw new EnderecoEmpresaInvalidoException();
+        Validador.validarHora(abre);
+        Validador.validarHora(fecha);
+        Validador.validarHorario(abre, fecha);
         if (!Validador.tipoMercadoValido(tipoMercado)) throw new TipoMercadoInvalidoException();
         Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == dono).findFirst().orElse(null);
         if (usuario == null || !(usuario instanceof DonoEmpresa)) {
@@ -143,11 +143,11 @@ public class EmpresaService {
     public void alterarFuncionamento(int mercado, String abre, String fecha) throws EmpresaNaoCadastradaException, FormatoHoraInvalidoException, HorarioInvalidoException {
         Empresa emp = empresasList.stream().filter(e -> e.getId() == mercado).findFirst().orElse(null);
         if (emp == null || !(emp instanceof Mercado)) {
-            throw new EmpresaNaoCadastradaException();
+            throw new EmpresaNaoCadastradaException("Nao e um mercado valido");
         }
-        if (!Validador.horaValida(abre)) throw new FormatoHoraInvalidoException();
-        if (!Validador.horaValida(fecha)) throw new FormatoHoraInvalidoException();
-        if (!Validador.horarioValido(abre, fecha)) throw new HorarioInvalidoException();
+        Validador.validarHora(abre);
+        Validador.validarHora(fecha);
+        Validador.validarHorario(abre, fecha);
         Mercado m = (Mercado) emp;
         m.setAbre(abre);
         m.setFecha(fecha);
