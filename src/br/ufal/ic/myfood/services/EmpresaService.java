@@ -17,10 +17,14 @@ import java.util.stream.Collectors;
 public class EmpresaService {
     private List<Empresa> empresasList;
     private UsuarioService usuarioService;
+    private RestauranteService restauranteService;
+    private MercadoService mercadoService;
 
     public EmpresaService(List<Empresa> empresasList, UsuarioService usuarioService) {
         this.empresasList = empresasList;
         this.usuarioService = usuarioService;
+        this.restauranteService = new RestauranteService(empresasList, usuarioService);
+        this.mercadoService = new MercadoService(empresasList, usuarioService);
     }
 
     public List<Empresa> getEmpresasList() {
@@ -30,47 +34,13 @@ public class EmpresaService {
     public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String tipoCozinha) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoEmpresaInvalidoException, TipoEmpresaInvalidoException {
         if (tipoEmpresa == null || tipoEmpresa.isEmpty()) throw new TipoEmpresaInvalidoException();
         if (!tipoEmpresa.equals("restaurante")) throw new TipoEmpresaInvalidoException();
-        if (!Validador.nomeValido(nome)) throw new NomeInvalidoException();
-        if (!Validador.enderecoValido(endereco)) throw new EnderecoEmpresaInvalidoException();
-        Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == dono).findFirst().orElse(null);
-        if (usuario == null || !(usuario instanceof DonoEmpresa)) {
-            throw new UsuarioNaoPodeCriarException();
-        }
-        if (empresasList.stream().anyMatch(e -> e.getNome().equals(nome) && e.getDono() != dono)) {
-            throw new EmpresaJaExisteException();
-        }
-        if (empresasList.stream().anyMatch(e -> e.getNome().equals(nome) && e.getEndereco().equals(endereco))) {
-            throw new ProibidoCadastrarException();
-        }
-        Empresa empresa = new Restaurante(nome, endereco, dono, tipoCozinha);
-        empresasList.add(empresa);
-        EmpresaRepository.save(empresasList);
-        return empresa.getId();
+        return restauranteService.criarRestaurante(dono, nome, endereco, tipoCozinha);
     }
 
     public int criarEmpresa(String tipoEmpresa, int dono, String nome, String endereco, String abre, String fecha, String tipoMercado) throws UsuarioNaoPodeCriarException, EmpresaJaExisteException, ProibidoCadastrarException, NomeInvalidoException, EnderecoEmpresaInvalidoException, TipoEmpresaInvalidoException, FormatoHoraInvalidoException, HorarioInvalidoException, TipoMercadoInvalidoException {
         if (tipoEmpresa == null || tipoEmpresa.isEmpty()) throw new TipoEmpresaInvalidoException();
         if (!tipoEmpresa.equals("mercado")) throw new TipoEmpresaInvalidoException();
-        if (!Validador.nomeValido(nome)) throw new NomeInvalidoException();
-        if (!Validador.enderecoValido(endereco)) throw new EnderecoEmpresaInvalidoException();
-        Validador.validarHora(abre);
-        Validador.validarHora(fecha);
-        Validador.validarHorario(abre, fecha);
-        if (!Validador.tipoMercadoValido(tipoMercado)) throw new TipoMercadoInvalidoException();
-        Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == dono).findFirst().orElse(null);
-        if (usuario == null || !(usuario instanceof DonoEmpresa)) {
-            throw new UsuarioNaoPodeCriarException();
-        }
-        if (empresasList.stream().anyMatch(e -> e.getNome().equals(nome) && e.getDono() != dono)) {
-            throw new EmpresaJaExisteException();
-        }
-        if (empresasList.stream().anyMatch(e -> e.getNome().equals(nome) && e.getEndereco().equals(endereco))) {
-            throw new ProibidoCadastrarException();
-        }
-        Empresa empresa = new Mercado(nome, endereco, dono, abre, fecha, tipoMercado);
-        empresasList.add(empresa);
-        EmpresaRepository.save(empresasList);
-        return empresa.getId();
+        return mercadoService.criarMercado(dono, nome, endereco, abre, fecha, tipoMercado);
     }
 
     public String getEmpresasDoUsuario(int idDono) throws UsuarioNaoPodeCriarException {
@@ -141,20 +111,12 @@ public class EmpresaService {
     }
 
     public void alterarFuncionamento(int mercado, String abre, String fecha) throws EmpresaNaoCadastradaException, FormatoHoraInvalidoException, HorarioInvalidoException {
-        Empresa emp = empresasList.stream().filter(e -> e.getId() == mercado).findFirst().orElse(null);
-        if (emp == null || !(emp instanceof Mercado)) {
-            throw new EmpresaNaoCadastradaException("Nao e um mercado valido");
-        }
-        Validador.validarHora(abre);
-        Validador.validarHora(fecha);
-        Validador.validarHorario(abre, fecha);
-        Mercado m = (Mercado) emp;
-        m.setAbre(abre);
-        m.setFecha(fecha);
-        EmpresaRepository.save(empresasList);
+        mercadoService.alterarFuncionamento(mercado, abre, fecha);
     }
 
     public void clear() {
-        this.empresasList = new ArrayList<>();
+        this.empresasList.clear();
+        this.restauranteService = new RestauranteService(empresasList, usuarioService);
+        this.mercadoService = new MercadoService(empresasList, usuarioService);
     }
 }

@@ -4,27 +4,27 @@
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Pedido">
     <void property="cliente">
-     <int>249</int>
+     <int>28</int>
     </void>
     <void property="empresa">
-     <int>224</int>
+     <int>24</int>
     </void>
     <void property="estado">
      <string>preparando</string>
     </void>
     <void property="numero">
-     <int>116</int>
+     <int>13</int>
     </void>
     <void property="produtos">
      <object class="java.util.ArrayList">
       <void method="add">
-       <int>231</int>
+       <int>19</int>
       </void>
       <void method="add">
-       <int>232</int>
+       <int>20</int>
       </void>
       <void method="add">
-       <int>233</int>
+       <int>21</int>
       </void>
      </object>
     </void>
@@ -36,24 +36,24 @@
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Pedido">
     <void property="cliente">
-     <int>249</int>
+     <int>28</int>
     </void>
     <void property="empresa">
-     <int>225</int>
+     <int>25</int>
     </void>
     <void property="estado">
      <string>aberto</string>
     </void>
     <void property="numero">
-     <int>117</int>
+     <int>14</int>
     </void>
     <void property="produtos">
      <object class="java.util.ArrayList">
       <void method="add">
-       <int>234</int>
+       <int>22</int>
       </void>
       <void method="add">
-       <int>234</int>
+       <int>22</int>
       </void>
      </object>
     </void>
@@ -65,16 +65,16 @@
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Pedido">
     <void property="cliente">
-     <int>249</int>
+     <int>28</int>
     </void>
     <void property="empresa">
-     <int>224</int>
+     <int>24</int>
     </void>
     <void property="estado">
      <string>aberto</string>
     </void>
     <void property="numero">
-     <int>118</int>
+     <int>15</int>
     </void>
     <void property="produtos">
      <object class="java.util.ArrayList"/>

@@ -7,7 +7,7 @@
      <string>07:30</string>
     </void>
     <void property="dono">
-     <int>250</int>
+     <int>29</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 123</string>
@@ -16,7 +16,7 @@
      <string>21:00</string>
     </void>
     <void property="id">
-     <int>224</int>
+     <int>24</int>
     </void>
     <void property="nome">
      <string>Mercado do Carlos</string>
@@ -35,7 +35,7 @@
      <string>06:30</string>
     </void>
     <void property="dono">
-     <int>250</int>
+     <int>29</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 123</string>
@@ -44,7 +44,7 @@
      <string>23:59</string>
     </void>
     <void property="id">
-     <int>225</int>
+     <int>25</int>
     </void>
     <void property="nome">
      <string>Conveniencias do Carlos</string>
@@ -63,7 +63,7 @@
      <string>07:30</string>
     </void>
     <void property="dono">
-     <int>250</int>
+     <int>29</int>
     </void>
     <void property="endereco">
      <string>Rua Otima N 852</string>
@@ -72,7 +72,7 @@
      <string>21:00</string>
     </void>
     <void property="id">
-     <int>226</int>
+     <int>26</int>
     </void>
     <void property="nome">
      <string>Mercado do Carlos</string>
@@ -91,7 +91,7 @@
      <string>05:25</string>
     </void>
     <void property="dono">
-     <int>251</int>
+     <int>30</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 123</string>
@@ -100,7 +100,7 @@
      <string>22:00</string>
     </void>
     <void property="id">
-     <int>227</int>
+     <int>27</int>
     </void>
     <void property="nome">
      <string>Mercado do Roberto</string>
@@ -116,13 +116,13 @@
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Restaurante">
     <void property="dono">
-     <int>250</int>
+     <int>29</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 987</string>
     </void>
     <void property="id">
-     <int>228</int>
+     <int>28</int>
     </void>
     <void property="nome">
      <string>Pastelaria do Carlos</string>

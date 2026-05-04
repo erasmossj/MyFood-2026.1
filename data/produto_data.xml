@@ -7,10 +7,10 @@
      <string>bebida</string>
     </void>
     <void property="empresa">
-     <int>224</int>
+     <int>24</int>
     </void>
     <void property="id">
-     <int>231</int>
+     <int>19</int>
     </void>
     <void property="nome">
      <string>Refrigerante</string>
@@ -26,10 +26,10 @@
      <string>limpeza</string>
     </void>
     <void property="empresa">
-     <int>224</int>
+     <int>24</int>
     </void>
     <void property="id">
-     <int>232</int>
+     <int>20</int>
     </void>
     <void property="nome">
      <string>Sabao</string>
@@ -45,10 +45,10 @@
      <string>verdura</string>
     </void>
     <void property="empresa">
-     <int>224</int>
+     <int>24</int>
     </void>
     <void property="id">
-     <int>233</int>
+     <int>21</int>
     </void>
     <void property="nome">
      <string>1kg Batatas</string>
@@ -64,10 +64,10 @@
      <string>escolar</string>
     </void>
     <void property="empresa">
-     <int>225</int>
+     <int>25</int>
     </void>
     <void property="id">
-     <int>234</int>
+     <int>22</int>
     </void>
     <void property="nome">
      <string>Caneta</string>
