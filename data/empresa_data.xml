@@ -2,136 +2,96 @@
 <java version="25.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Mercado">
-    <void property="abre">
-     <string>07:30</string>
+   <object class="br.ufal.ic.myfood.models.Farmacia">
+    <void property="aberto24Horas">
+     <boolean>true</boolean>
     </void>
     <void property="dono">
-     <int>29</int>
+     <int>107</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 123</string>
     </void>
-    <void property="fecha">
-     <string>21:00</string>
-    </void>
     <void property="id">
-     <int>24</int>
+     <int>125</int>
     </void>
     <void property="nome">
-     <string>Mercado do Carlos</string>
+     <string>Farmacia 24 horas do Carlos</string>
+    </void>
+    <void property="numeroFuncionarios">
+     <int>2</int>
     </void>
     <void property="tipoEmpresa">
-     <string>mercado</string>
-    </void>
-    <void property="tipoMercado">
-     <string>supermercado</string>
+     <string>farmacia</string>
     </void>
    </object>
   </void>
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Mercado">
-    <void property="abre">
-     <string>06:30</string>
-    </void>
+   <object class="br.ufal.ic.myfood.models.Farmacia">
     <void property="dono">
-     <int>29</int>
+     <int>107</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 123</string>
     </void>
-    <void property="fecha">
-     <string>23:59</string>
-    </void>
     <void property="id">
-     <int>25</int>
+     <int>126</int>
     </void>
     <void property="nome">
-     <string>Conveniencias do Carlos</string>
+     <string>Farmacia do Carlos</string>
+    </void>
+    <void property="numeroFuncionarios">
+     <int>2</int>
     </void>
     <void property="tipoEmpresa">
-     <string>mercado</string>
-    </void>
-    <void property="tipoMercado">
-     <string>minimercado</string>
+     <string>farmacia</string>
     </void>
    </object>
   </void>
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Mercado">
-    <void property="abre">
-     <string>07:30</string>
+   <object class="br.ufal.ic.myfood.models.Farmacia">
+    <void property="aberto24Horas">
+     <boolean>true</boolean>
     </void>
     <void property="dono">
-     <int>29</int>
+     <int>107</int>
     </void>
     <void property="endereco">
      <string>Rua Otima N 852</string>
     </void>
-    <void property="fecha">
-     <string>21:00</string>
-    </void>
     <void property="id">
-     <int>26</int>
+     <int>127</int>
     </void>
     <void property="nome">
-     <string>Mercado do Carlos</string>
+     <string>Farmacia 24 horas do Carlos</string>
+    </void>
+    <void property="numeroFuncionarios">
+     <int>2</int>
     </void>
     <void property="tipoEmpresa">
-     <string>mercado</string>
-    </void>
-    <void property="tipoMercado">
-     <string>atacadista</string>
+     <string>farmacia</string>
     </void>
    </object>
   </void>
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Mercado">
-    <void property="abre">
-     <string>05:25</string>
-    </void>
+   <object class="br.ufal.ic.myfood.models.Farmacia">
     <void property="dono">
-     <int>30</int>
+     <int>108</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 123</string>
     </void>
-    <void property="fecha">
-     <string>22:00</string>
-    </void>
     <void property="id">
-     <int>27</int>
+     <int>128</int>
     </void>
     <void property="nome">
-     <string>Mercado do Roberto</string>
+     <string>Farmacia do Roberto</string>
+    </void>
+    <void property="numeroFuncionarios">
+     <int>2</int>
     </void>
     <void property="tipoEmpresa">
-     <string>mercado</string>
-    </void>
-    <void property="tipoMercado">
-     <string>supermercado</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="br.ufal.ic.myfood.models.Restaurante">
-    <void property="dono">
-     <int>29</int>
-    </void>
-    <void property="endereco">
-     <string>Rua Segura N 987</string>
-    </void>
-    <void property="id">
-     <int>28</int>
-    </void>
-    <void property="nome">
-     <string>Pastelaria do Carlos</string>
-    </void>
-    <void property="tipoCozinha">
-     <string>brasileira</string>
-    </void>
-    <void property="tipoEmpresa">
-     <string>restaurante</string>
+     <string>farmacia</string>
     </void>
    </object>
   </void>

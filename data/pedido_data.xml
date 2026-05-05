@@ -4,56 +4,56 @@
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Pedido">
     <void property="cliente">
-     <int>28</int>
+     <int>106</int>
     </void>
     <void property="empresa">
-     <int>24</int>
+     <int>125</int>
     </void>
     <void property="estado">
      <string>preparando</string>
     </void>
     <void property="numero">
-     <int>13</int>
+     <int>61</int>
     </void>
     <void property="produtos">
      <object class="java.util.ArrayList">
       <void method="add">
-       <int>19</int>
+       <int>101</int>
       </void>
       <void method="add">
-       <int>20</int>
+       <int>102</int>
       </void>
       <void method="add">
-       <int>21</int>
+       <int>103</int>
       </void>
      </object>
     </void>
     <void property="valor">
-     <float>9.4</float>
+     <float>8.9</float>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Pedido">
     <void property="cliente">
-     <int>28</int>
+     <int>106</int>
     </void>
     <void property="empresa">
-     <int>25</int>
+     <int>126</int>
     </void>
     <void property="estado">
      <string>aberto</string>
     </void>
     <void property="numero">
-     <int>14</int>
+     <int>62</int>
     </void>
     <void property="produtos">
      <object class="java.util.ArrayList">
       <void method="add">
-       <int>22</int>
+       <int>104</int>
       </void>
       <void method="add">
-       <int>22</int>
+       <int>104</int>
       </void>
      </object>
     </void>
@@ -65,16 +65,16 @@
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Pedido">
     <void property="cliente">
-     <int>28</int>
+     <int>106</int>
     </void>
     <void property="empresa">
-     <int>24</int>
+     <int>125</int>
     </void>
     <void property="estado">
      <string>aberto</string>
     </void>
     <void property="numero">
-     <int>15</int>
+     <int>63</int>
     </void>
     <void property="produtos">
      <object class="java.util.ArrayList"/>

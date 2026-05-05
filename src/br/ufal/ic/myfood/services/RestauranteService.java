@@ -37,5 +37,11 @@ public class RestauranteService {
         EmpresaRepository.save(empresasList);
         return empresa.getId();
     }
-}
 
+    public List<Empresa> getEmpresasList() {
+        return empresasList;
+    }
+
+    public void clear() {
+    }
+}

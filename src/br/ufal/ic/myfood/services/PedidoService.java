@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 public class PedidoService {
     private List<Pedido> pedidosList;
     private UsuarioService usuarioService;
-    private EmpresaService empresaService;
+    private List<Empresa> empresasList;
     private ProdutoService produtoService;
 
-    public PedidoService(List<Pedido> pedidosList, UsuarioService usuarioService, EmpresaService empresaService, ProdutoService produtoService) {
+    public PedidoService(List<Pedido> pedidosList, UsuarioService usuarioService, List<Empresa> empresasList, ProdutoService produtoService) {
         this.pedidosList = pedidosList;
         this.usuarioService = usuarioService;
-        this.empresaService = empresaService;
+        this.empresasList = empresasList;
         this.produtoService = produtoService;
     }
 
@@ -65,7 +65,7 @@ public class PedidoService {
                 Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == ped.getCliente()).findFirst().orElseThrow(PedidoNaoEncontradoException::new);
                 return usuario.getNome();
             case "empresa":
-                Empresa emp = empresaService.getEmpresasList().stream().filter(e -> e.getId() == ped.getEmpresa()).findFirst().orElseThrow(PedidoNaoEncontradoException::new);
+                Empresa emp = empresasList.stream().filter(e -> e.getId() == ped.getEmpresa()).findFirst().orElseThrow(PedidoNaoEncontradoException::new);
                 return emp.getNome();
             case "estado":
                 return ped.getEstado();

@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 
 public class ProdutoService {
     private List<Produto> produtosList;
-    private EmpresaService empresaService;
+    private List<Empresa> empresasList;
 
-    public ProdutoService(List<Produto> produtosList, EmpresaService empresaService) {
+    public ProdutoService(List<Produto> produtosList, List<Empresa> empresasList) {
         this.produtosList = produtosList;
-        this.empresaService = empresaService;
+        this.empresasList = empresasList;
     }
 
     public List<Produto> getProdutosList() {
@@ -25,7 +25,7 @@ public class ProdutoService {
     }
 
     public int criarProduto(int empresa, String nome, float valor, String categoria) throws EmpresaNaoEncontradaException, NomeInvalidoException, ValorInvalidoException, CategoriaInvalidoException, ProdutoJaExisteException {
-        if (empresaService.getEmpresasList().stream().noneMatch(e -> e.getId() == empresa)) throw new EmpresaNaoEncontradaException();
+        if (empresasList.stream().noneMatch(e -> e.getId() == empresa)) throw new EmpresaNaoEncontradaException();
         if (!Validador.nomeValido(nome)) throw new NomeInvalidoException();
         if (!Validador.valorValido(valor)) throw new ValorInvalidoException();
         if (!Validador.categoriaValida(categoria)) throw new CategoriaInvalidoException();
@@ -49,7 +49,7 @@ public class ProdutoService {
     }
 
     public String getProduto(String nome, int empresa, String atributo) throws ProdutoNaoEncontradoException, AtributoNaoExisteException, EmpresaNaoEncontradaException {
-        if (empresaService.getEmpresasList().stream().noneMatch(e -> e.getId() == empresa)) throw new EmpresaNaoEncontradaException();
+        if (empresasList.stream().noneMatch(e -> e.getId() == empresa)) throw new EmpresaNaoEncontradaException();
         Produto prod = produtosList.stream().filter(p -> p.getNome().equals(nome) && p.getEmpresa() == empresa).findFirst().orElse(null);
         if (prod == null) throw new ProdutoNaoEncontradoException();
         switch (atributo) {
@@ -58,7 +58,7 @@ public class ProdutoService {
             case "categoria":
                 return prod.getCategoria();
             case "empresa":
-                Empresa emp = empresaService.getEmpresasList().stream().filter(e -> e.getId() == prod.getEmpresa()).findFirst().orElseThrow(ProdutoNaoEncontradoException::new);
+                Empresa emp = empresasList.stream().filter(e -> e.getId() == prod.getEmpresa()).findFirst().orElseThrow(ProdutoNaoEncontradoException::new);
                 return emp.getNome();
             default:
                 throw new AtributoNaoExisteException();
@@ -66,7 +66,7 @@ public class ProdutoService {
     }
 
     public String listarProdutos(int empresa) throws EmpresaNaoEncontradaException {
-        if (empresaService.getEmpresasList().stream().noneMatch(e -> e.getId() == empresa)) throw new EmpresaNaoEncontradaException();
+        if (empresasList.stream().noneMatch(e -> e.getId() == empresa)) throw new EmpresaNaoEncontradaException();
         List<Produto> produtosEmpresa = produtosList.stream().filter(p -> p.getEmpresa() == empresa).collect(Collectors.toList());
         String conteudo = produtosEmpresa.stream().map(Produto::getNome).collect(Collectors.joining(", "));
         return "{[" + conteudo + "]}";
