@@ -5,6 +5,7 @@ import br.ufal.ic.myfood.repository.UsuarioRepository;
 import br.ufal.ic.myfood.models.Usuario;
 import br.ufal.ic.myfood.models.Cliente;
 import br.ufal.ic.myfood.models.DonoEmpresa;
+import br.ufal.ic.myfood.models.Entregador;
 import br.ufal.ic.myfood.utils.Validador;
 
 import java.util.ArrayList;
@@ -42,6 +43,16 @@ public class UsuarioService {
                     return ((DonoEmpresa) usuario).getCpf();
                 }
                 throw new UsuarioNaoExisteException();
+            case "veiculo":
+                if (usuario instanceof Entregador) {
+                    return ((Entregador) usuario).getVeiculo();
+                }
+                throw new UsuarioNaoExisteException();
+            case "placa":
+                if (usuario instanceof Entregador) {
+                    return ((Entregador) usuario).getPlaca();
+                }
+                throw new UsuarioNaoExisteException();
             default:
                 throw new UsuarioNaoExisteException();
         }
@@ -68,6 +79,20 @@ public class UsuarioService {
 
         DonoEmpresa dono = new DonoEmpresa(nome, email, senha, endereco, cpf);
         addUsuario(dono);
+    }
+
+    public void criarUsuario(String nome, String email, String senha, String endereco, String veiculo, String placa) throws UsuarioJaExisteException, NomeInvalidoException, EmailInvalidoException, SenhaInvalidoException, EnderecoInvalidoException, VeiculoInvalidoException, PlacaInvalidoException {
+        if (!Validador.nomeValido(nome)) throw new NomeInvalidoException();
+        if (!Validador.emailValido(email)) throw new EmailInvalidoException();
+        if (!Validador.senhaValida(senha)) throw new SenhaInvalidoException();
+        if (!Validador.enderecoValido(endereco)) throw new EnderecoInvalidoException();
+        if (!Validador.veiculoValido(veiculo)) throw new VeiculoInvalidoException();
+        if (!Validador.placaValida(placa)) throw new PlacaInvalidoException();
+        if (usuariosList.stream().anyMatch(u -> u instanceof Entregador && ((Entregador) u).getPlaca().equals(placa))) throw new PlacaInvalidoException();
+        if (usuariosList.stream().anyMatch(u -> u.getEmail().equals(email))) throw new UsuarioJaExisteException();
+
+        Entregador entregador = new Entregador(nome, email, senha, endereco, veiculo, placa);
+        addUsuario(entregador);
     }
 
     public int login(String email, String senha) throws LoginOuSenhaInvalidoException {

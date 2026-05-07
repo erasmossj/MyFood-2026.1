@@ -16,6 +16,7 @@ public class Facade {
     private FarmaciaService farmaciaService;
     private ProdutoService produtoService;
     private PedidoService pedidoService;
+    private EntregaService entregaService;
     private List<Empresa> empresasList;
 
     public Facade() {
@@ -25,7 +26,9 @@ public class Facade {
         this.mercadoService = new MercadoService(empresasList, usuarioService);
         this.farmaciaService = new FarmaciaService(empresasList, usuarioService);
         this.produtoService = new ProdutoService(ProdutoRepository.load(), empresasList);
-        this.pedidoService = new PedidoService(PedidoRepository.load(), usuarioService, empresasList, produtoService);
+        this.pedidoService = new PedidoService(PedidoRepository.load(), usuarioService, empresasList, produtoService, null);
+        this.entregaService = new EntregaService(EntregaRepository.load(), pedidoService.getPedidosList(), ProdutoRepository.load(), empresasList, usuarioService);
+        this.pedidoService.setEntregaService(entregaService);
     }
 
     public void zerarSistema(){
@@ -33,13 +36,22 @@ public class Facade {
         EmpresaRepository.clear();
         ProdutoRepository.clear();
         PedidoRepository.clear();
+        EntregaRepository.clear();
         usuarioService.clear();
         restauranteService.clear();
         mercadoService.clear();
         farmaciaService.clear();
         produtoService.clear();
         pedidoService.clear();
+        entregaService.clear();
+        entregaService.setPedidosList(pedidoService.getPedidosList());
         this.empresasList.clear();
+
+        Usuario.updateNextId(0);
+        Empresa.updateNextId(0);
+        Produto.updateNextId(0);
+        Pedido.updateNextNumero(0);
+        Entrega.updateNextId(0);
     }
 
     public String getAtributoUsuario(int id, String atributo) throws UsuarioNaoExisteException {
@@ -52,6 +64,10 @@ public class Facade {
 
     public void criarUsuario(String nome, String email, String senha, String endereco, String cpf) throws UsuarioJaExisteException, NomeInvalidoException, EmailInvalidoException, SenhaInvalidoException, EnderecoInvalidoException, CpfInvalidoException {
         this.usuarioService.criarUsuario(nome, email, senha, endereco, cpf);
+    }
+
+    public void criarUsuario(String nome, String email, String senha, String endereco, String veiculo, String placa) throws UsuarioJaExisteException, NomeInvalidoException, EmailInvalidoException, SenhaInvalidoException, EnderecoInvalidoException, VeiculoInvalidoException, PlacaInvalidoException {
+        this.usuarioService.criarUsuario(nome, email, senha, endereco, veiculo, placa);
     }
 
     public int login(String email, String senha) throws LoginOuSenhaInvalidoException {
@@ -211,6 +227,63 @@ public class Facade {
         this.mercadoService.alterarFuncionamento(mercado, abre, fecha);
     }
 
+    public void cadastrarEntregador(int empresa, int entregador) throws UsuarioNaoExisteException, EmpresaNaoCadastradaException, UsuarioNaoEEntregadorException {
+        Empresa emp = empresasList.stream().filter(e -> e.getId() == empresa).findFirst().orElseThrow(EmpresaNaoCadastradaException::new);
+        Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == entregador).findFirst().orElseThrow(UsuarioNaoExisteException::new);
+        if (!(usuario instanceof Entregador)) {
+            throw new UsuarioNaoEEntregadorException();
+        }
+        if (!emp.getEntregadores().contains(entregador)) {
+            emp.getEntregadores().add(entregador);
+        }
+    }
+
+    public String getEntregadores(int empresa) throws EmpresaNaoCadastradaException {
+        Empresa emp = empresasList.stream().filter(e -> e.getId() == empresa).findFirst().orElseThrow(EmpresaNaoCadastradaException::new);
+        List<String> emails = emp.getEntregadores().stream().map(id -> usuarioService.getUsuariosList().stream().filter(u -> u.getId() == id).findFirst().map(Usuario::getEmail).orElse("")).collect(Collectors.toList());
+        if (emails.isEmpty()) {
+            return "{[]}";
+        }
+        return "{[" + String.join(", ", emails) + "]}";
+    }
+
+    public String getEmpresas(int entregador) throws UsuarioNaoExisteException, UsuarioNaoEEntregadorException {
+        Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == entregador).findFirst().orElseThrow(UsuarioNaoExisteException::new);
+        if (!(usuario instanceof Entregador)) {
+            throw new UsuarioNaoEEntregadorException();
+        }
+        List<Empresa> empresas = empresasList.stream().filter(e -> e.getEntregadores().contains(entregador)).collect(Collectors.toList());
+        if (empresas.isEmpty()) {
+            return "{[]}";
+        }
+        String conteudo = empresas.stream().map(e -> "[" + e.getNome() + ", " + e.getEndereco() + "]").collect(Collectors.joining(", "));
+        return "{[" + conteudo + "]}";
+    }
+
+    public void liberarPedido(int numero) throws PedidoNaoEncontradoException, PedidoJaLiberadoException, NaoEPossivelLiberarException {
+        this.pedidoService.liberarPedido(numero);
+    }
+
+    public int obterPedido(int entregador) throws UsuarioNaoEEntregadorException, EntregadorNaoEstaEmEmpresaException, NaoExistePedidoParaEntregaException {
+        return this.pedidoService.obterPedido(entregador);
+    }
+
+    public int criarEntrega(int pedido, int entregador, String destino) throws NaoEEntregadorValidoException, PedidoNaoEstaProntoException, EntregadorAindaEmEntregaException, PedidoNaoEncontradoException {
+        return this.pedidoService.criarEntrega(pedido, entregador, destino);
+    }
+
+    public String getEntrega(int id, String atributo) throws AtributoInvalidoException, AtributoNaoExisteException {
+        return this.entregaService.getEntrega(id, atributo);
+    }
+
+    public int getIdEntrega(int pedido) throws NaoExisteEntregaException {
+        return this.entregaService.getIdEntrega(pedido);
+    }
+
+    public void entregar(int entrega) throws NaoExisteNadaParaSerEntregueException {
+        this.entregaService.entregar(entrega);
+    }
+
     public void encerrarSistema() {
         UsuarioRepository.save(usuarioService.getUsuariosList());
         EmpresaRepository.save(restauranteService.getEmpresasList());
@@ -218,6 +291,7 @@ public class Facade {
         EmpresaRepository.save(farmaciaService.getEmpresasList());
         ProdutoRepository.save(produtoService.getProdutosList());
         PedidoRepository.save(pedidoService.getPedidosList());
+        EntregaRepository.save(entregaService.getEntregasList());
     }
 
 }

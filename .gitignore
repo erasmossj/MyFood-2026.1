@@ -31,3 +31,6 @@ bin/
 
 ### Github Token ###
 dev_key.txt
+
+### Data Files ###
+data/*

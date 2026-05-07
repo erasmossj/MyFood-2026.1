@@ -4,13 +4,35 @@
   <void method="add">
    <object class="br.ufal.ic.myfood.models.Cliente">
     <void property="email">
+     <string>carlos@ufal.com.br</string>
+    </void>
+    <void property="endereco">
+     <string>Rua Exemplo N 123</string>
+    </void>
+    <void property="id">
+     <int>1</int>
+    </void>
+    <void property="nome">
+     <string>Carlos</string>
+    </void>
+    <void property="senha">
+     <string>123senha</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.DonoEmpresa">
+    <void property="cpf">
+     <string>544.732.410-68</string>
+    </void>
+    <void property="email">
      <string>lucas@ufal.com.br</string>
     </void>
     <void property="endereco">
      <string>Rua Exemplo N 321</string>
     </void>
     <void property="id">
-     <int>106</int>
+     <int>2</int>
     </void>
     <void property="nome">
      <string>Lucas</string>
@@ -21,46 +43,52 @@
    </object>
   </void>
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.DonoEmpresa">
-    <void property="cpf">
-     <string>544.732.410-68</string>
-    </void>
+   <object class="br.ufal.ic.myfood.models.Entregador">
     <void property="email">
-     <string>carlos@ufal.com.br</string>
+     <string>rodrigo@ufal.com.br</string>
     </void>
     <void property="endereco">
-     <string>Rua Exemplo N 321</string>
+     <string>Rua Exemplo N 123</string>
     </void>
     <void property="id">
-     <int>107</int>
+     <int>3</int>
     </void>
     <void property="nome">
-     <string>CarlosDono</string>
+     <string>Rodrigo</string>
+    </void>
+    <void property="placa">
+     <string>BRA 1234</string>
     </void>
     <void property="senha">
      <string>123senha</string>
+    </void>
+    <void property="veiculo">
+     <string>moto</string>
     </void>
    </object>
   </void>
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.DonoEmpresa">
-    <void property="cpf">
-     <string>544.732.410-68</string>
-    </void>
+   <object class="br.ufal.ic.myfood.models.Entregador">
     <void property="email">
-     <string>roberto@ufal.com.br</string>
+     <string>joana@ufal.com.br</string>
     </void>
     <void property="endereco">
-     <string>Rua Exemplo N 321</string>
+     <string>Rua Exemplo N 123</string>
     </void>
     <void property="id">
-     <int>108</int>
+     <int>4</int>
     </void>
     <void property="nome">
-     <string>RobertoDono</string>
+     <string>Joana</string>
+    </void>
+    <void property="placa">
+     <string>BRA 8574</string>
     </void>
     <void property="senha">
      <string>123senha</string>
+    </void>
+    <void property="veiculo">
+     <string>carro</string>
     </void>
    </object>
   </void>

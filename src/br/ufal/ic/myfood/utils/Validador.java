@@ -9,39 +9,39 @@ public class Validador {
         if (senha.length() < 7) return false;
         return true;
     }
-    
+
     public static boolean emailValido(String email){
         if (email == null || email.isEmpty()) return false;
         if (!email.contains("@")) return false;
         return true;
     }
-    
+
     public static boolean nomeValido(String nome) {
         if (nome == null || nome.isEmpty()) return false;
         return true;
     }
-    
+
     public static boolean enderecoValido(String endereco) {
         if (endereco == null || endereco.isEmpty()) return false;
         return true;
     }
-    
+
     public static boolean cpfValido(String cpf) {
         if (cpf == null || cpf.isEmpty()) return false;
         if (cpf.length() != 14) return false;
         return true;
     }
-    
+
     public static boolean valorValido(float valor) {
         if (valor <= 0) return false;
         return true;
     }
-    
+
     public static boolean categoriaValida(String categoria) {
         if (categoria == null || categoria.isEmpty()) return false;
         return true;
     }
-    
+
     public static boolean indiceValido(int indice) {
         if (indice < 0) return false;
         return true;
@@ -71,5 +71,16 @@ public class Validador {
     public static boolean tipoMercadoValido(String tipoMercado) {
         if (tipoMercado == null || tipoMercado.isEmpty()) return false;
         return tipoMercado.equals("supermercado") || tipoMercado.equals("minimercado") || tipoMercado.equals("atacadista");
+    }
+
+    public static boolean veiculoValido(String veiculo) {
+        if (veiculo == null || veiculo.isEmpty()) return false;
+        return veiculo.equals("moto") || veiculo.equals("carro") || veiculo.equals("bicicleta");
+    }
+
+    public static boolean placaValida(String placa) {
+        if (placa == null || placa.isEmpty()) return false;
+        if (!placa.matches("[A-Z]{3}[- ]\\d{4}")) return false;
+        return true;
     }
 }

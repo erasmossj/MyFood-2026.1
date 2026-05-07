@@ -10,6 +10,8 @@ import br.ufal.ic.myfood.models.DonoEmpresa;
 import br.ufal.ic.myfood.models.Pedido;
 import br.ufal.ic.myfood.models.Produto;
 import br.ufal.ic.myfood.models.Empresa;
+import br.ufal.ic.myfood.models.Entregador;
+import br.ufal.ic.myfood.models.Entrega;
 import br.ufal.ic.myfood.utils.Validador;
 
 import java.util.ArrayList;
@@ -21,12 +23,14 @@ public class PedidoService {
     private UsuarioService usuarioService;
     private List<Empresa> empresasList;
     private ProdutoService produtoService;
+    private EntregaService entregaService;
 
-    public PedidoService(List<Pedido> pedidosList, UsuarioService usuarioService, List<Empresa> empresasList, ProdutoService produtoService) {
+    public PedidoService(List<Pedido> pedidosList, UsuarioService usuarioService, List<Empresa> empresasList, ProdutoService produtoService, EntregaService entregaService) {
         this.pedidosList = pedidosList;
         this.usuarioService = usuarioService;
         this.empresasList = empresasList;
         this.produtoService = produtoService;
+        this.entregaService = entregaService;
     }
 
     public List<Pedido> getPedidosList() {
@@ -86,6 +90,15 @@ public class PedidoService {
         PedidoRepository.save(pedidosList);
     }
 
+    public void liberarPedido(int numero) throws PedidoNaoEncontradoException, PedidoJaLiberadoException, NaoEPossivelLiberarException {
+        Pedido pedido = pedidosList.stream().filter(p -> p.getNumero() == numero).findFirst().orElse(null);
+        if (pedido == null) throw new PedidoNaoEncontradoException();
+        if ("pronto".equals(pedido.getEstado())) throw new PedidoJaLiberadoException();
+        if (!"preparando".equals(pedido.getEstado())) throw new NaoEPossivelLiberarException();
+        pedido.setEstado("pronto");
+        PedidoRepository.save(pedidosList);
+    }
+
     public void removerProduto(int pedido, String produto) throws ProdutoInvalidoException, ProdutoNaoEncontradoException, NaoPossivelRemoverProdutosException, PedidoNaoEncontradoException {
         if (produto == null || produto.isEmpty()) throw new ProdutoInvalidoException();
         Pedido ped = pedidosList.stream().filter(p -> p.getNumero() == pedido).findFirst().orElse(null);
@@ -107,5 +120,70 @@ public class PedidoService {
 
     public void clear() {
         this.pedidosList = new ArrayList<>();
+    }
+
+    public int obterPedido(int entregador) throws UsuarioNaoEEntregadorException, EntregadorNaoEstaEmEmpresaException, NaoExistePedidoParaEntregaException {
+        Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == entregador).findFirst().orElse(null);
+        if (usuario == null) {
+            throw new UsuarioNaoEEntregadorException();
+        }
+        if (!(usuario instanceof Entregador)) {
+            throw new UsuarioNaoEEntregadorException();
+        }
+        List<Empresa> empresasEntregador = empresasList.stream().filter(e -> e.getEntregadores().contains(entregador)).collect(Collectors.toList());
+        if (empresasEntregador.isEmpty()) {
+            throw new EntregadorNaoEstaEmEmpresaException();
+        }
+        // First, pharmacy pedidos
+        List<Pedido> pharmacyPedidos = pedidosList.stream()
+            .filter(p -> "pronto".equals(p.getEstado()) && empresasEntregador.stream().anyMatch(e -> e.getId() == p.getEmpresa() && "farmacia".equals(e.getTipo())))
+            .sorted((p1, p2) -> Integer.compare(p1.getNumero(), p2.getNumero()))
+            .collect(Collectors.toList());
+        if (!pharmacyPedidos.isEmpty()) {
+            return pharmacyPedidos.get(0).getNumero();
+        }
+        // Then, other pedidos
+        List<Pedido> otherPedidos = pedidosList.stream()
+            .filter(p -> "pronto".equals(p.getEstado()) && empresasEntregador.stream().anyMatch(e -> e.getId() == p.getEmpresa() && !"farmacia".equals(e.getTipo())))
+            .sorted((p1, p2) -> Integer.compare(p1.getNumero(), p2.getNumero()))
+            .collect(Collectors.toList());
+        if (!otherPedidos.isEmpty()) {
+            return otherPedidos.get(0).getNumero();
+        }
+        throw new NaoExistePedidoParaEntregaException();
+    }
+
+    public int criarEntrega(int pedido, int entregador, String destino) throws NaoEEntregadorValidoException, PedidoNaoEstaProntoException, EntregadorAindaEmEntregaException, PedidoNaoEncontradoException {
+        Pedido ped = pedidosList.stream().filter(p -> p.getNumero() == pedido).findFirst().orElse(null);
+        if (ped == null) {
+            throw new PedidoNaoEncontradoException();
+        }
+        if (!"pronto".equals(ped.getEstado())) {
+            throw new PedidoNaoEstaProntoException();
+        }
+        Usuario usuario = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == entregador).findFirst().orElse(null);
+        if (usuario == null) {
+            throw new NaoEEntregadorValidoException();
+        }
+        if (!(usuario instanceof Entregador)) {
+            throw new NaoEEntregadorValidoException();
+        }
+        // Check if entregador is busy
+        boolean isBusy = entregaService.getEntregasList().stream().anyMatch(e -> e.getEntregador().equals(usuario.getNome()) && pedidosList.stream().anyMatch(p -> p.getNumero() == e.getPedido() && "entregando".equals(p.getEstado())));
+        if (isBusy) {
+            throw new EntregadorAindaEmEntregaException();
+        }
+        Empresa emp = empresasList.stream().filter(e -> e.getId() == ped.getEmpresa()).findFirst().orElseThrow(PedidoNaoEncontradoException::new);
+        Usuario cliente = usuarioService.getUsuariosList().stream().filter(u -> u.getId() == ped.getCliente()).findFirst().orElseThrow(PedidoNaoEncontradoException::new);
+        List<String> produtos = ped.getProdutos().stream().map(p -> produtoService.getProdutosList().stream().filter(pr -> pr.getId() == p).findFirst().map(Produto::getNome).orElse("")).collect(Collectors.toList());
+        Entrega entrega = new Entrega(cliente.getNome(), emp.getNome(), pedido, usuario.getNome(), destino != null && !destino.isEmpty() ? destino : cliente.getEndereco(), produtos);
+        entregaService.addEntrega(entrega);
+        ped.setEstado("entregando");
+        PedidoRepository.save(pedidosList);
+        return entrega.getId();
+    }
+
+    public void setEntregaService(EntregaService entregaService) {
+        this.entregaService = entregaService;
     }
 }

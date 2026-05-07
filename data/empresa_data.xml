@@ -2,90 +2,84 @@
 <java version="25.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
-   <object class="br.ufal.ic.myfood.models.Farmacia">
+   <object class="br.ufal.ic.myfood.models.Restaurante" id="Restaurante0">
+    <void property="dono">
+     <int>2</int>
+    </void>
+    <void property="endereco">
+     <string>Rua Segura N 987</string>
+    </void>
+    <void property="entregadores">
+     <void method="add">
+      <int>3</int>
+     </void>
+     <void method="add">
+      <int>4</int>
+     </void>
+    </void>
+    <void property="id">
+     <int>1</int>
+    </void>
+    <void property="nome">
+     <string>Pastelaria</string>
+    </void>
+    <void property="tipoCozinha">
+     <string>brasileira</string>
+    </void>
+    <void property="tipoEmpresa">
+     <string>restaurante</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Mercado">
+    <void property="abre">
+     <string>07:30</string>
+    </void>
+    <void property="dono">
+     <int>2</int>
+    </void>
+    <void property="endereco">
+     <string>Rua Segura N 123</string>
+    </void>
+    <void property="fecha">
+     <string>21:00</string>
+    </void>
+    <void property="id">
+     <int>2</int>
+    </void>
+    <void property="nome">
+     <string>Mercado</string>
+    </void>
+    <void property="tipoEmpresa">
+     <string>mercado</string>
+    </void>
+    <void property="tipoMercado">
+     <string>supermercado</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="br.ufal.ic.myfood.models.Farmacia" id="Farmacia0">
     <void property="aberto24Horas">
      <boolean>true</boolean>
     </void>
     <void property="dono">
-     <int>107</int>
+     <int>2</int>
     </void>
     <void property="endereco">
      <string>Rua Segura N 123</string>
     </void>
-    <void property="id">
-     <int>125</int>
-    </void>
-    <void property="nome">
-     <string>Farmacia 24 horas do Carlos</string>
-    </void>
-    <void property="numeroFuncionarios">
-     <int>2</int>
-    </void>
-    <void property="tipoEmpresa">
-     <string>farmacia</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="br.ufal.ic.myfood.models.Farmacia">
-    <void property="dono">
-     <int>107</int>
-    </void>
-    <void property="endereco">
-     <string>Rua Segura N 123</string>
+    <void property="entregadores">
+     <void method="add">
+      <int>3</int>
+     </void>
     </void>
     <void property="id">
-     <int>126</int>
+     <int>3</int>
     </void>
     <void property="nome">
-     <string>Farmacia do Carlos</string>
-    </void>
-    <void property="numeroFuncionarios">
-     <int>2</int>
-    </void>
-    <void property="tipoEmpresa">
-     <string>farmacia</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="br.ufal.ic.myfood.models.Farmacia">
-    <void property="aberto24Horas">
-     <boolean>true</boolean>
-    </void>
-    <void property="dono">
-     <int>107</int>
-    </void>
-    <void property="endereco">
-     <string>Rua Otima N 852</string>
-    </void>
-    <void property="id">
-     <int>127</int>
-    </void>
-    <void property="nome">
-     <string>Farmacia 24 horas do Carlos</string>
-    </void>
-    <void property="numeroFuncionarios">
-     <int>2</int>
-    </void>
-    <void property="tipoEmpresa">
-     <string>farmacia</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="br.ufal.ic.myfood.models.Farmacia">
-    <void property="dono">
-     <int>108</int>
-    </void>
-    <void property="endereco">
-     <string>Rua Segura N 123</string>
-    </void>
-    <void property="id">
-     <int>128</int>
-    </void>
-    <void property="nome">
-     <string>Farmacia do Roberto</string>
+     <string>Farmacia</string>
     </void>
     <void property="numeroFuncionarios">
      <int>2</int>
