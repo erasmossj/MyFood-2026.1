@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido implements Serializable {
-    static int nextNumero = 1;
+    static final int INITIAL_NUMERO = 1;
+    static int nextNumero = INITIAL_NUMERO;
     private int numero;
     private int cliente;
     private int empresa;

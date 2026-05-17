@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Empresa implements Serializable {
-    static int nextId = 1;
+    static final int INITIAL_ID = 1;
+    static int nextId = INITIAL_ID;
     private int id;
     private String nome;
     private String endereco;

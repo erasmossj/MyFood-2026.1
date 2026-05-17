@@ -3,7 +3,8 @@ package br.ufal.ic.myfood.models;
 import java.io.Serializable;
 
 public abstract class Usuario implements Serializable {
-    static int nextId = 1;
+    static final int INITIAL_ID = 1;
+    static int nextId = INITIAL_ID;
     private int id;
     private String nome;
     private String email;

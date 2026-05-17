@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Entrega implements Serializable {
-    static int nextId = 1;
+    static final int INITIAL_ID = 1;
+    static int nextId = INITIAL_ID;
     private int id;
     private String cliente;
     private String empresa;

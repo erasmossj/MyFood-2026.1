@@ -10,18 +10,20 @@ public final class Entregador extends Usuario {
         setEmail(email);
         setSenha(senha);
         setEndereco(endereco);
-        setVeiculo(veiculo);
-        setPlaca(placa);
+        this.veiculo = veiculo;
+        this.placa = placa;
     }
 
     public Entregador() {
+        this.veiculo = null;
+        this.placa = null;
     }
 
     public String getVeiculo() {
         return veiculo;
     }
 
-    public void setVeiculo(String veiculo) {
+    public void setVeiculo(final String veiculo) {
         this.veiculo = veiculo;
     }
 
@@ -29,7 +31,7 @@ public final class Entregador extends Usuario {
         return placa;
     }
 
-    public void setPlaca(String placa) {
+    public void setPlaca(final String placa) {
         this.placa = placa;
     }
 }
