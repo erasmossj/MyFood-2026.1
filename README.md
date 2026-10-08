@@ -1,5 +1,51 @@
 # MyFood-2026.1
 
+Sistema de delivery em Java — clientes, empresas (restaurantes, mercados e farmácias), produtos, pedidos e entregas — desenvolvido para a disciplina de **Programação 2**, ministrada pelo professor **Mário Hozano** no Instituto de Computação da UFAL (IC/UFAL), em 2026.1.
+
+## Sobre
+
+O MyFood é implementado em etapas (*user stories*), cada uma validada por testes de aceitação do [EasyAccept](lib/easyaccept.jar). O foco do projeto é a organização do código em camadas (Facade, serviços, modelos e repositórios), detalhada na seção [Arquitetura](#arquitetura-do-projeto-myfood20261).
+
+## Funcionalidades
+
+Cada item corresponde a uma *user story* com testes em [`tests/`](tests):
+
+1. **Contas de usuário** — criação de contas de clientes e de donos de empresa.
+2. **Restaurantes** — donos de empresa cadastram seus restaurantes.
+3. **Produtos** — cadastro de produtos para a empresa.
+4. **Pedidos** — clientes adicionam produtos ao carrinho e finalizam a compra.
+5. **Mercados** — cadastro de mercados como novo tipo de empresa.
+6. **Farmácias** — cadastro de farmácias como novo tipo de empresa.
+7. **Entregadores** — novo tipo de conta, além de cliente e dono de empresa.
+8. **Entregas** — entregadores consultam os pedidos e fazem a entrega até o cliente.
+
+Os dados são persistidos em arquivos XML na pasta `data/`.
+
+## Tecnologias
+
+- Java (sem frameworks externos)
+- [EasyAccept](lib/easyaccept.jar) para os testes de aceitação
+- `java.beans.XMLEncoder`/`XMLDecoder` para a persistência em XML
+
+## Como rodar
+
+O `Main` executa, em sequência, todos os testes de aceitação das *user stories*. Rode **a partir da raiz do projeto**, porque os caminhos de `tests/` e `data/` são relativos. Veja também o aviso sobre a versão do JDK no fim deste README.
+
+**Pela IDE (IntelliJ IDEA):** abra a pasta do projeto, adicione `lib/easyaccept.jar` como biblioteca e execute `br.ufal.ic.myfood.Main`.
+
+**Pelo terminal** (Linux/macOS; no Windows troque `:` por `;` no classpath):
+
+```bash
+javac -cp lib/easyaccept.jar -d out $(find src -name "*.java")
+java -cp out:lib/easyaccept.jar br.ufal.ic.myfood.Main
+```
+
+## Autor
+
+Desenvolvido por **Erasmo da Silva Sá Junior** — [GitHub](https://github.com/erasmossj) · [LinkedIn](https://www.linkedin.com/in/erasmo-junior-883010309/).
+
+---
+
 ## Arquitetura do Projeto MyFood2026.1
 
 ### Visão Geral
