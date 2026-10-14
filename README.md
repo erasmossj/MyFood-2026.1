@@ -1,4 +1,4 @@
-# MyFood-2026.1
+# MyFood
 
 Sistema de delivery em Java — clientes, empresas (restaurantes, mercados e farmácias), produtos, pedidos e entregas — desenvolvido para a disciplina de **Programação 2**, ministrada pelo professor **Mário Hozano** no Instituto de Computação da UFAL (IC/UFAL), em 2026.1.
 
